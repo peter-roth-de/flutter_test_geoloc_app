@@ -139,7 +139,7 @@ class HomeState extends State<Home> {
               .toList(),*/
               Image.network(locations == null
                   ? "https://heise.cloudimg.io/width/336/q50.png-lossy-50.webp-lossy-50.foil1/_www-heise-de_/imgs/18/2/4/8/8/6/8/5/dji_mavic_2_pro-d585e304494c7d70.jpeg"
-                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=AIzaSyDGszfKX4MqLFbB8EYZgTsFK3dcdkPNl5I"),
+                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=${google.api.key}"),
               Text(
                 (locations == null ? 'no location determined' : "You are here: ${locations.location.longitude} : ${locations.location.latitude}")),
               ],
