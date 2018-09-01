@@ -92,7 +92,7 @@ class HomeState extends State<Home> {
               .toList(),*/
               Image.network(locations == null
                   ? ""
-                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=AIzaSyDGszfKX4MqLFbB8EYZgTsFK3dcdkPNl5I"),
+                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=${google.api.key}"),
               Text(
                   "You are here: ${locations.location.longitude} : ${locations.location.latitude}"),
               ],
