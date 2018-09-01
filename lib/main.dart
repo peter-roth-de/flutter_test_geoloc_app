@@ -24,10 +24,12 @@ class Home extends StatefulWidget {
 }
 class HomeState extends State<Home> {
   MapController controller = new MapController();
+  final TextEditingController textFieldController = new TextEditingController();
   LocationResult locations;
   StreamSubscription<LocationResult> streamSubscription;
   //Stream<LocationResult> streamSubscription;
   bool trackLocation = false;
+  String sGoogleApiKey = "";
 
   @override initState() {
     super.initState();
@@ -37,6 +39,12 @@ class HomeState extends State<Home> {
     locations = null;
   }
 
+  @override
+  void dispose() {
+    // Clean up the controller when the Widget is disposed
+    textFieldController.dispose();
+    super.dispose();
+  }
   getPermission() async {
     final GeolocationResult result =
     await Geolocation.requestLocationPermission(const LocationPermission(
@@ -139,7 +147,15 @@ class HomeState extends State<Home> {
               .toList(),*/
               Image.network(locations == null
                   ? "https://heise.cloudimg.io/width/336/q50.png-lossy-50.webp-lossy-50.foil1/_www-heise-de_/imgs/18/2/4/8/8/6/8/5/dji_mavic_2_pro-d585e304494c7d70.jpeg"
-                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=${google.api.key}"),
+                  : "https://maps.googleapis.com/maps/api/staticmap?center=${locations.location.latitude},${locations.location.longitude}&zoom=12&size=400x400&key=${textFieldController.text}"),
+              TextField(
+                controller: textFieldController,
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    labelText: "Google API Key:",
+                    hintText: 'Please enter the key!'
+                ),
+              ),
               Text(
                 (locations == null ? 'no location determined' : "You are here: ${locations.location.longitude} : ${locations.location.latitude}")),
               ],
